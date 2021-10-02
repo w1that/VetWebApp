@@ -4,20 +4,22 @@ import java.util.List;
 import java.util.Optional;
 
 import vetapp.vetwebapp.entities.Vet;
+import vetapp.vetwebapp.results.DataResult;
+import vetapp.vetwebapp.results.Result;
 
 public interface VetService {
 	
-	List<Vet> getAll();
-	Optional<Vet> getById(int id);
-	void add(Vet vet);
-	void deleteAll();
-	void deleteById(int id);
+	DataResult<List<Vet>> getAll();
+	DataResult<Optional<Vet>> getById(int id);
+	Result add(Vet vet);
+	Result deleteAll();
+	Result deleteById(int id);
 	
 	
-	List<Vet> getByClinicNameLike(String like);
-	List<Vet> getByClinicNameContaining(String containing);
-	List<Vet> getByIsActiveTrue();
+	DataResult<List<Vet>>  getByClinicNameLike(String like);
+	DataResult<List<Vet>>  getByClinicNameContaining(String containing);
+	DataResult<List<Vet>> getByIsActiveTrue();
 	
-	void setActive(int vetId);
+	Result setActive(int vetId);
 	
 }

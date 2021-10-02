@@ -8,6 +8,12 @@ import org.springframework.stereotype.Service;
 
 import vetapp.vetwebapp.entities.Vet;
 import vetapp.vetwebapp.repository.VetDao;
+import vetapp.vetwebapp.results.DataResult;
+import vetapp.vetwebapp.results.ErrorDataResult;
+import vetapp.vetwebapp.results.ErrorResult;
+import vetapp.vetwebapp.results.Result;
+import vetapp.vetwebapp.results.SuccessDataResult;
+import vetapp.vetwebapp.results.SuccessResult;
 import vetapp.vetwebapp.service.abstracts.VetService;
 
 @Service
@@ -17,48 +23,88 @@ public class VetManager implements VetService{
 	private VetDao vetDao;
 	
 	@Override
-	public List<Vet> getAll() {
-		return this.vetDao.findAll();
+	public DataResult<List<Vet>> getAll() {
+		try {
+			return new SuccessDataResult<List<Vet>>(this.vetDao.findAll());
+		} catch (Exception e) {
+			return new ErrorDataResult<List<Vet>>(e.toString());
+		}
 	}
 
 	@Override
-	public Optional<Vet> getById(int id) {
-		return this.vetDao.findById(id);
+	public DataResult<Optional<Vet>> getById(int id) {
+		try {
+			return new SuccessDataResult<Optional<Vet>>(this.vetDao.findById(id));
+		} catch (Exception e) {
+			return new ErrorDataResult<Optional<Vet>>(e.toString());
+		}
 	}
 
 	@Override
-	public void add(Vet vet) {
-		this.vetDao.save(vet);
+	public Result add(Vet vet) {
+		try {
+			this.vetDao.save(vet);
+			return new SuccessResult("eklendi. yeni vet:" + vet);
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
 		
 	}
 
 	@Override
-	public void deleteAll() {
-		this.vetDao.deleteAll();
+	public Result deleteAll() {
+		try {
+			this.vetDao.deleteAll();
+			return new SuccessResult("hepsi silindi");
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
 	}
 
 	@Override
-	public void deleteById(int id) {
-		this.vetDao.deleteById(id);
+	public Result deleteById(int id) {
+		try {
+			this.vetDao.deleteById(id);
+			return new SuccessResult("silindi. id:" + id);
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
 	}
 
 	@Override
-	public List<Vet> getByClinicNameLike(String like) {
-		return this.vetDao.findByClinicNameLike(like);
+	public DataResult<List<Vet>> getByClinicNameLike(String like) {
+		try {
+			return new SuccessDataResult<List<Vet>>(this.vetDao.findByClinicNameLike(like));
+		} catch (Exception e) {
+			return new ErrorDataResult<List<Vet>>(e.toString());
+		}
 	}
 
 	@Override
-	public List<Vet> getByClinicNameContaining(String containing) {
-		return this.vetDao.findByClinicNameContaining(containing);
+	public DataResult<List<Vet>> getByClinicNameContaining(String containing) {
+		try {
+			return new SuccessDataResult<List<Vet>>(this.vetDao.findByClinicNameContaining(containing), "klinik ismi '"+ containing+ "' içerenler getirildi");
+		} catch (Exception e) {
+			return new ErrorDataResult<List<Vet>>(e.toString());
+		}
 	}
 
 	@Override
-	public List<Vet> getByIsActiveTrue() {
-		return this.vetDao.findByIsActiveTrue();
+	public DataResult<List<Vet>> getByIsActiveTrue() {
+		try {
+			return new SuccessDataResult<List<Vet>>(this.vetDao.findByIsActiveTrue(), "aktif olanlar getirildi.");
+		} catch (Exception e) {
+			return new ErrorDataResult<List<Vet>>(e.toString());
+		}
 	}
 
 	@Override
-	public void setActive(int vetId) {
-		this.vetDao.setActive(vetId);
+	public Result setActive(int vetId) {
+		try {
+			this.vetDao.setActive(vetId);
+			return new SuccessResult("aktif edildi.");
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
 	}
 }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import vetapp.vetwebapp.entities.Genus;
+import vetapp.vetwebapp.results.DataResult;
+import vetapp.vetwebapp.results.Result;
 import vetapp.vetwebapp.service.abstracts.GenusService;
 
 @RestController
@@ -23,28 +25,30 @@ public class GenusesController {
 	private GenusService genusService;
 	
 	@GetMapping("/")
-	public List<Genus> getAll(){
+	public DataResult<List<Genus>> getAll(){
 		return this.genusService.getAll();
 	}
 	
+	
 	@GetMapping("/genus")
-	public Optional<Genus> getById(@RequestParam int id){
+	public DataResult<Optional<Genus>> getById(@RequestParam int id){
 		return this.genusService.getById(id);
 	}
 	
 	@PostMapping("/")
-	public void add(@RequestBody Genus genus) {
-		this.genusService.add(genus);
+	public Result add(@RequestBody Genus genus) {
+		return this.genusService.add(genus);
 	}
 	
 	@DeleteMapping("/")
-	public void deleteAll() {
-		this.genusService.deleteAll();
+	public Result deleteAll() {
+		return this.genusService.deleteAll();
+		
 	}
 	
 	@DeleteMapping("/genus")
-	public void deleteById(@RequestParam int id) {
-		this.genusService.deleteById(id);
+	public Result deleteById(@RequestParam int id) {
+		return this.genusService.deleteById(id);
 	}
 
 }

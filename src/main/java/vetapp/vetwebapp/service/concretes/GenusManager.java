@@ -8,6 +8,12 @@ import org.springframework.stereotype.Service;
 
 import vetapp.vetwebapp.entities.Genus;
 import vetapp.vetwebapp.repository.GenusDao;
+import vetapp.vetwebapp.results.DataResult;
+import vetapp.vetwebapp.results.ErrorDataResult;
+import vetapp.vetwebapp.results.ErrorResult;
+import vetapp.vetwebapp.results.Result;
+import vetapp.vetwebapp.results.SuccessDataResult;
+import vetapp.vetwebapp.results.SuccessResult;
 import vetapp.vetwebapp.service.abstracts.GenusService;
 
 @Service
@@ -17,28 +23,52 @@ public class GenusManager implements GenusService{
 	private GenusDao genusDao;
 	
 	@Override
-	public List<Genus> getAll() {
-		return genusDao.findAll();
+	public DataResult<List<Genus>> getAll() {
+		try {
+			return new SuccessDataResult<List<Genus>>(genusDao.findAll());
+		} catch (Exception e) {
+			return new ErrorDataResult<List<Genus>>(e.toString());
+		}
 	}
 
 	@Override
-	public Optional<Genus> getById(int id) {
-		return genusDao.findById(id);
+	public DataResult<Optional<Genus>> getById(int id) {
+		try {
+			return new SuccessDataResult<Optional<Genus>>();
+		} catch (Exception e) {
+			return new ErrorDataResult<Optional<Genus>>(e.toString());
+		}
 	}
 
 	@Override
-	public void add(Genus genus) {
-		this.genusDao.save(genus);
+	public Result add(Genus genus) {
+		try {
+			this.genusDao.save(genus);
+			return new SuccessResult("eklendi "+ genus);
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
+		
 	}
 
 	@Override
-	public void deleteById(int id) {
-		this.genusDao.deleteById(id);
+	public Result deleteById(int id) {
+		try {
+			this.genusDao.deleteById(id);
+			return new SuccessResult("silindi id:" + Integer.toString(id));
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
 	}
 
 	@Override
-	public void deleteAll() {
-		this.genusDao.deleteAll();
+	public Result deleteAll() {
+		try {
+			this.genusDao.deleteAll();
+			return new SuccessResult("hepsi silindi. genuses:"+ genusDao.findAll());
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
 	}
 	
 	

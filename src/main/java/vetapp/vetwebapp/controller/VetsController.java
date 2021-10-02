@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import vetapp.vetwebapp.entities.Vet;
+import vetapp.vetwebapp.results.DataResult;
+import vetapp.vetwebapp.results.Result;
 import vetapp.vetwebapp.service.abstracts.VetService;
 
 @RestController
@@ -25,48 +27,48 @@ public class VetsController {
 	
 	
 	@GetMapping("/")
-	List<Vet> getAll(){
+	DataResult<List<Vet>> getAll(){
 		return this.vetService.getAll();
 	}
 	
 	@GetMapping("/vet")
-	Optional<Vet> getById(@RequestParam int id){
+	DataResult<Optional<Vet>> getById(@RequestParam int id){
 		return this.vetService.getById(id);
 	}
 	
 	@GetMapping("/getByClinicNameLike")
-	List<Vet> getByClinicNameLike(String like){
+	DataResult<List<Vet>> getByClinicNameLike(String like){
 		return this.vetService.getByClinicNameLike(like);
 	}
 	
 	@GetMapping("/getByClinicNameContaining")
-	List<Vet> getByClinicNameContaining(String containing){
+	DataResult<List<Vet>> getByClinicNameContaining(String containing){
 		return this.vetService.getByClinicNameContaining(containing);
 	}
 	
 	@GetMapping("getActives")
-	List<Vet> getByIsActiveTrue(){
+	DataResult<List<Vet>> getByIsActiveTrue(){
 		return this.vetService.getByIsActiveTrue();
 	}
 	
 	@PostMapping("/")
-	void add(@RequestBody Vet vet) {
-		this.vetService.add(vet);
+	Result add(@RequestBody Vet vet) {
+		return this.vetService.add(vet);
 	}
 	
 	@PutMapping("/")
-	void setActive(int vetId) {
-		this.vetService.setActive(vetId);
+	Result setActive(int vetId) {
+		return this.vetService.setActive(vetId);
 	}
 	
 	@DeleteMapping("/")
-	void deleteAll() {
-		this.vetService.deleteAll();
+	Result deleteAll() {
+		return this.vetService.deleteAll();
 	}
 	
 	@DeleteMapping("/vet")
-	void deleteById(int id) {
-		this.vetService.deleteById(id);
+	Result deleteById(int id) {
+		return this.vetService.deleteById(id);
 	}
 	
 	

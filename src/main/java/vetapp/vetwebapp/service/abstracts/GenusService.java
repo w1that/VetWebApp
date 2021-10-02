@@ -4,11 +4,13 @@ import java.util.List;
 import java.util.Optional;
 
 import vetapp.vetwebapp.entities.Genus;
+import vetapp.vetwebapp.results.DataResult;
+import vetapp.vetwebapp.results.Result;
 
 public interface GenusService {
-	List<Genus> getAll();
-	Optional<Genus> getById(int id);
-	void add(Genus genus);
-	void deleteById(int id);
-	void deleteAll();
+	DataResult<List<Genus>> getAll();
+	DataResult<Optional<Genus>>  getById(int id);
+	Result add(Genus genus);
+	Result deleteById(int id);
+	Result deleteAll();
 }
