@@ -31,7 +31,7 @@ public class GenusesController {
 	
 	
 	@GetMapping("/genus")
-	public DataResult<Optional<Genus>> getById(@RequestParam int id){
+	public DataResult<Genus> getById(@RequestParam int id){
 		return this.genusService.getById(id);
 	}
 	

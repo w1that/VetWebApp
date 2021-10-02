@@ -4,17 +4,21 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import vetapp.vetwebapp.entities.images.VetImage;
 import vetapp.vetwebapp.repository.VetImageDao;
 import vetapp.vetwebapp.results.DataResult;
+import vetapp.vetwebapp.results.ErrorDataResult;
 import vetapp.vetwebapp.results.ErrorResult;
 import vetapp.vetwebapp.results.Result;
+import vetapp.vetwebapp.results.SuccessDataResult;
 import vetapp.vetwebapp.results.SuccessResult;
 import vetapp.vetwebapp.service.abstracts.VetImageService;
 import vetapp.vetwebapp.utilities.imageUpload.ImageUploadService;
 
+@Service
 public class VetImageManager implements VetImageService {
 
 	@Autowired
@@ -43,20 +47,30 @@ public class VetImageManager implements VetImageService {
 
 	@Override
 	public DataResult<List<VetImage>> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return new SuccessDataResult<List<VetImage>>();
+		} catch (Exception e) {
+			return new ErrorDataResult<List<VetImage>>(e.toString());
+		}
 	}
 
 	@Override
 	public Result deleteById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			this.vetImageDao.deleteById(id);
+			return new SuccessResult("silindi. id: "+ id);
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
 	}
 
 	@Override
 	public DataResult<List<VetImage>> getByVetId(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			return new SuccessDataResult<List<VetImage>>(this.vetImageDao.getByVetId(id));
+		} catch (Exception e) {
+			return new ErrorDataResult<List<VetImage>>(e.toString());
+		}
 	}
 
 

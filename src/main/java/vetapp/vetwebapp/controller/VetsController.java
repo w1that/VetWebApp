@@ -32,7 +32,7 @@ public class VetsController {
 	}
 	
 	@GetMapping("/vet")
-	DataResult<Optional<Vet>> getById(@RequestParam int id){
+	DataResult<Vet> getById(@RequestParam int id){
 		return this.vetService.getById(id);
 	}
 	

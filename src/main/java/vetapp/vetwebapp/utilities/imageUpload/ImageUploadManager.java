@@ -3,6 +3,7 @@ package vetapp.vetwebapp.utilities.imageUpload;
 import java.io.IOException;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
@@ -11,6 +12,7 @@ import vetapp.vetwebapp.results.DataResult;
 import vetapp.vetwebapp.results.ErrorDataResult;
 import vetapp.vetwebapp.results.SuccessDataResult;
 
+@Service
 public class ImageUploadManager implements ImageUploadService {
 
 	@Override

@@ -32,11 +32,11 @@ public class VetManager implements VetService{
 	}
 
 	@Override
-	public DataResult<Optional<Vet>> getById(int id) {
+	public DataResult<Vet> getById(int id) {
 		try {
-			return new SuccessDataResult<Optional<Vet>>(this.vetDao.findById(id));
+			return new SuccessDataResult<Vet>(this.vetDao.getById(id));
 		} catch (Exception e) {
-			return new ErrorDataResult<Optional<Vet>>(e.toString());
+			return new ErrorDataResult<Vet>(e.toString());
 		}
 	}
 

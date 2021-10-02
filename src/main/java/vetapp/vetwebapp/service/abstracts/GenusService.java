@@ -9,7 +9,7 @@ import vetapp.vetwebapp.results.Result;
 
 public interface GenusService {
 	DataResult<List<Genus>> getAll();
-	DataResult<Optional<Genus>>  getById(int id);
+	DataResult<Genus>  getById(int id);
 	Result add(Genus genus);
 	Result deleteById(int id);
 	Result deleteAll();

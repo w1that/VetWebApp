@@ -1,5 +1,7 @@
 package vetapp.vetwebapp.results;
 
+import vetapp.vetwebapp.entities.Vet;
+
 public class DataResult<T> extends Result {
 
 	private T data;

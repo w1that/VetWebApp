@@ -32,11 +32,11 @@ public class GenusManager implements GenusService{
 	}
 
 	@Override
-	public DataResult<Optional<Genus>> getById(int id) {
+	public DataResult<Genus> getById(int id) {
 		try {
-			return new SuccessDataResult<Optional<Genus>>();
+			return new SuccessDataResult<Genus>(this.genusDao.getById(id));
 		} catch (Exception e) {
-			return new ErrorDataResult<Optional<Genus>>(e.toString());
+			return new ErrorDataResult<Genus>(e.toString());
 		}
 	}
 

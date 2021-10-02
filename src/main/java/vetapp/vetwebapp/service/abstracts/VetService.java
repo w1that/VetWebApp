@@ -10,7 +10,7 @@ import vetapp.vetwebapp.results.Result;
 public interface VetService {
 	
 	DataResult<List<Vet>> getAll();
-	DataResult<Optional<Vet>> getById(int id);
+	DataResult<Vet> getById(int id);
 	Result add(Vet vet);
 	Result deleteAll();
 	Result deleteById(int id);

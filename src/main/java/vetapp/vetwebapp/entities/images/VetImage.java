@@ -1,6 +1,7 @@
 package vetapp.vetwebapp.entities.images;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
