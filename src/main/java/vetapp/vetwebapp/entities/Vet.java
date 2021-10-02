@@ -23,6 +23,8 @@ import vetapp.vetwebapp.entities.images.VetImage;
 @Table(name="vets")
 public class Vet extends User {
 	
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	private int id;
@@ -38,5 +40,8 @@ public class Vet extends User {
 	
     @OneToMany(mappedBy = "vet")
 	private List<VetImage> vetImages;
+    
+    @Column(name="activity")
+    private int activity;
 	
 }

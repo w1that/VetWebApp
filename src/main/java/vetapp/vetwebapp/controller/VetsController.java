@@ -51,9 +51,16 @@ public class VetsController {
 		return this.vetService.getByIsActiveTrue();
 	}
 	
-	@PostMapping("/")
+	/*@PostMapping("/")
 	Result add(@RequestBody Vet vet) {
 		return this.vetService.add(vet);
+	}*/
+	
+	@PostMapping("/")
+	Result add(@RequestParam String username, @RequestParam String password, @RequestParam String clinicName,
+			@RequestParam String email, @RequestParam String address) {
+		
+		return this.vetService.add(username, password, clinicName, email, address);
 	}
 	
 	@PutMapping("/")

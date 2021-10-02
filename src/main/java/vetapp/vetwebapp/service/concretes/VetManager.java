@@ -3,10 +3,16 @@ package vetapp.vetwebapp.service.concretes;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sun.istack.NotNull;
+
 import vetapp.vetwebapp.entities.Vet;
+import vetapp.vetwebapp.entities.images.VetImage;
 import vetapp.vetwebapp.repository.VetDao;
 import vetapp.vetwebapp.results.DataResult;
 import vetapp.vetwebapp.results.ErrorDataResult;
@@ -40,17 +46,7 @@ public class VetManager implements VetService{
 		}
 	}
 
-	@Override
-	public Result add(Vet vet) {
-		try {
-			this.vetDao.save(vet);
-			return new SuccessResult("eklendi. yeni vet:" + vet);
-		} catch (Exception e) {
-			return new ErrorResult(e.toString());
-		}
-		
-	}
-
+	
 	@Override
 	public Result deleteAll() {
 		try {
@@ -74,7 +70,7 @@ public class VetManager implements VetService{
 	@Override
 	public DataResult<List<Vet>> getByClinicNameLike(String like) {
 		try {
-			return new SuccessDataResult<List<Vet>>(this.vetDao.findByClinicNameLike(like));
+			return new SuccessDataResult<List<Vet>>(this.vetDao.findByClinicNameLike(like), "öğe bulundu: "+ this.vetDao.findByClinicNameLike(like).size()+ " tane" );
 		} catch (Exception e) {
 			return new ErrorDataResult<List<Vet>>(e.toString());
 		}
@@ -103,6 +99,28 @@ public class VetManager implements VetService{
 		try {
 			this.vetDao.setActive(vetId);
 			return new SuccessResult("aktif edildi.");
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
+	}
+
+	@Override
+	public Result add(String username, String password, String clinicName, String email, String address) {
+		// username, password, clinicName, email, address
+		try {
+			if(username.length()>6 && password.length()>=6) {
+				Vet vet = new Vet();
+				vet.setUsername(username);
+				vet.setPassword(password);
+				vet.setClinicName(clinicName);
+				vet.setEmail(email);
+				vet.setAddress(address);
+				this.vetDao.save(vet);
+				return new SuccessResult("eklendi. yeni vet:" + vet);
+			}
+			else {
+				return new ErrorResult("Kullanıcı adı ve şifre en az 6 haneli olmalıdır.");
+			}
 		} catch (Exception e) {
 			return new ErrorResult(e.toString());
 		}
