@@ -8,6 +8,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.Nullable;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +29,9 @@ public class Genus {
 	
 	@Column(name="name")
 	private String name;
-	
+	 
+	@JsonIgnore
 	@OneToOne(mappedBy = "genus")
+	@Nullable
 	private Pet pet;
 }

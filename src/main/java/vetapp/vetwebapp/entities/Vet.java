@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Table(name="vets")
 public class Vet extends User {
 	
-	/*clinicname, stars, home service*/
+	
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY )

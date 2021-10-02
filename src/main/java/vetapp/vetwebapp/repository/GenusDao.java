@@ -1,5 +1,9 @@
 package vetapp.vetwebapp.repository;
 
-public interface GenusDao {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import vetapp.vetwebapp.entities.Genus;
+
+public interface GenusDao extends JpaRepository<Genus, Integer> {
 
 }

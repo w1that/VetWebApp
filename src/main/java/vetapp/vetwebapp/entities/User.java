@@ -7,13 +7,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.CreatedDate;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
+
+import lombok.Data;
 
 
 @MappedSuperclass
 @Table(name="users")
 @JsonIgnoreProperties("id")
+@Data
 public class User {
 	
 	@Id
@@ -37,7 +43,8 @@ public class User {
 	@Column(name="is_active" )
 	private boolean isActive = false;
 	
-	@Column(name="created_at")
+	@Column(name="created_at" )
+	@CreatedDate
 	private LocalDate createdAt = LocalDate.now();
 	
 	

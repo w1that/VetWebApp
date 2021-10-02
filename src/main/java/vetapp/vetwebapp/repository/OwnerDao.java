@@ -1,5 +1,13 @@
 package vetapp.vetwebapp.repository;
 
-public interface OwnerDao {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
+import vetapp.vetwebapp.entities.Owner;
+
+public interface OwnerDao extends JpaRepository<Owner, Integer> {
+
+	
+	@Query(value="update owner set is_active=true where id=:ownerId", nativeQuery = true)
+	void setActive(int ownerId);
 }
