@@ -1,7 +1,6 @@
 package vetapp.vetwebapp.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,44 +10,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import vetapp.vetwebapp.entities.Genus;
+import vetapp.vetwebapp.entities.Pet;
 import vetapp.vetwebapp.results.DataResult;
 import vetapp.vetwebapp.results.Result;
-import vetapp.vetwebapp.service.abstracts.GenusService;
+import vetapp.vetwebapp.service.abstracts.PetService;
 
 @RestController
-@RequestMapping("/v1/genuses")
-public class GenusesController {
+@RequestMapping("/v1/pets")
+public class PetsController {
 	
 	@Autowired
-	private GenusService genusService;
+	private PetService petService;
 	
 	@GetMapping("/")
-	public DataResult<List<Genus>> getAll(){
-		return this.genusService.getAll();
+	public DataResult<List<Pet>> getAll() {
+		return this.petService.getAll();
 	}
 	
-	
-	@GetMapping("/genus")
-	public DataResult<Genus> getById(@RequestParam int id){
-		return this.genusService.getById(id);
-	}
-	
-	@PostMapping("/")
-	public Result add(@RequestParam String name) {
-		return this.genusService.add(name);
+	@GetMapping("/pet/")
+	public DataResult<Pet> getById(@RequestParam int id){
+		return this.petService.getById(id);
 	}
 	
 	@DeleteMapping("/")
 	public Result deleteAll() {
-		return this.genusService.deleteAll();
-		
+		return this.petService.deleteAll();
 	}
 	
-	@DeleteMapping("/genus")
+	@DeleteMapping("/pet/")
 	public Result deleteById(@RequestParam int id) {
-		return this.genusService.deleteById(id);
+		return this.petService.deleteById(id);
 	}
-
+	
+	@PostMapping("/")
+	public Result add(String disease, int age, int genusId, int ownerId) {
+		return this.petService.add(disease, age, genusId, ownerId);
+	}
+	
 }

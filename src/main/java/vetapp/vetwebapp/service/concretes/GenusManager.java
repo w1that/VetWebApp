@@ -41,8 +41,10 @@ public class GenusManager implements GenusService{
 	}
 
 	@Override
-	public Result add(Genus genus) {
+	public Result add(String name) {
 		try {
+			Genus genus = new Genus();
+			genus.setName(name);
 			this.genusDao.save(genus);
 			return new SuccessResult("eklendi "+ genus);
 		} catch (Exception e) {

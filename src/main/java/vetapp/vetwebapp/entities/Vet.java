@@ -41,7 +41,4 @@ public class Vet extends User {
     @OneToMany(mappedBy = "vet")
 	private List<VetImage> vetImages;
     
-    @Column(name="activity")
-    private int activity;
-	
 }
