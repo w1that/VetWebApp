@@ -18,7 +18,6 @@ import lombok.Data;
 
 @MappedSuperclass
 @Table(name="users")
-@JsonIgnoreProperties("id")
 @Data
 public class User {
 	

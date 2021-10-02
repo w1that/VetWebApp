@@ -16,7 +16,7 @@ import vetapp.vetwebapp.entities.Genus;
 import vetapp.vetwebapp.service.abstracts.GenusService;
 
 @RestController
-@RequestMapping("/api/genuses")
+@RequestMapping("/v1/genuses")
 public class GenusesController {
 	
 	@Autowired
