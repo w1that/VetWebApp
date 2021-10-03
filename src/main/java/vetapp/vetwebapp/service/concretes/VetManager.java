@@ -40,7 +40,7 @@ public class VetManager implements VetService{
 	@Override
 	public DataResult<Vet> getById(int id) {
 		try {
-			return new SuccessDataResult<Vet>(this.vetDao.getById(id));
+			return new SuccessDataResult<Vet>(this.vetDao.findById(id).get());
 		} catch (Exception e) {
 			return new ErrorDataResult<Vet>(e.toString());
 		}
