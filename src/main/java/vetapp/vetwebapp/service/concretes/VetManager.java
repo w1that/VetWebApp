@@ -105,7 +105,7 @@ public class VetManager implements VetService{
 	}
 
 	@Override
-	public Result add(String username, String password, String clinicName, String email, String address) {
+	public Result add(String username, String password, String clinicName, String email, String latitude, String longitude) {
 		// username, password, clinicName, email, address
 		try {
 			if(username.length()>6 && password.length()>=6) {
@@ -114,7 +114,8 @@ public class VetManager implements VetService{
 				vet.setPassword(password);
 				vet.setClinicName(clinicName);
 				vet.setEmail(email);
-				vet.setAddress(address);
+				vet.setLatitude(latitude);
+				vet.setLongitude(longitude);
 				this.vetDao.save(vet);
 				return new SuccessResult("eklendi. yeni vet:" + vet);
 			}

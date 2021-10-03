@@ -58,9 +58,9 @@ public class VetsController {
 	
 	@PostMapping("/")
 	Result add(@RequestParam String username, @RequestParam String password, @RequestParam String clinicName,
-			@RequestParam String email, @RequestParam String address) {
+			@RequestParam String email,@RequestParam String latitude,@RequestParam String longitude) {
 		
-		return this.vetService.add(username, password, clinicName, email, address);
+		return this.vetService.add(username, password, clinicName, email, latitude, longitude);
 	}
 	
 	@PutMapping("/")

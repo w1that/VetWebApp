@@ -26,16 +26,14 @@ public class User {
 	@NotNull
 	@Column(name="username")
 	private String username;
+	
 	@NotNull
 	@Column(name="password")
 	private String password;
+	
 	@NotNull
 	@Column(name="email")
 	private String email;
-	
-	@NotNull
-	@Column(name="address")
-	private String address;
 	
 	@Column(name="is_active" )
 	private boolean isActive = false;
@@ -44,5 +42,10 @@ public class User {
 	@CreatedDate
 	private LocalDate createdAt = LocalDate.now();
 	
+	@Column(name="longitude")
+	private String longitude;
+	
+	@Column(name="latitude")
+	private String latitude;
 	
 }

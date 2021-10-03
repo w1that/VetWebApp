@@ -31,8 +31,13 @@ public class OwnersController {
 		return this.ownerService.getById(id);
 	}
 	
+	@GetMapping("/owner/")
+	public DataResult<Owner> getByEmail(@RequestParam String email){
+		return this.ownerService.getByEmail(email);
+	}
+	
 	@PostMapping("/")
-	public Result add(@RequestParam String username, @RequestParam String password, @RequestParam String email, @RequestParam String address, @RequestParam String firstName, @RequestParam String lastName) {
-		return this.ownerService.add(username, password, email, address, firstName, lastName);
+	public Result add(@RequestParam String username, @RequestParam String password, @RequestParam String email,@RequestParam String latitude,@RequestParam String longitude, @RequestParam String firstName, @RequestParam String lastName) {
+		return this.ownerService.add(username, password, email, latitude, longitude, firstName, lastName);
 	}
 }

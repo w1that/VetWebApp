@@ -10,8 +10,13 @@ import vetapp.vetwebapp.entities.Owner;
 
 public interface OwnerDao extends JpaRepository<Owner, Integer> {
 
+	
+	Owner findByEmailContaining(String email);
+	Owner findByUsername(String username);
+	
 	@Transactional
 	@Modifying
 	@Query(value="update owner set is_active=true where id=:ownerId", nativeQuery = true)
 	void setActive(int ownerId);
+	
 }

@@ -22,13 +22,21 @@ public class OwnerManager implements OwnerService {
 	private OwnerDao ownerDao;
 	
 	@Override
-	public Result add(String username, String password, String email, String address, String firstName,
+	public Result add(String username, String password, String email, String latitude, String longitude, String firstName,
 			String lastName) {
+		if(this.ownerDao.findByEmailContaining(email) !=null) {
+			
+			return new ErrorResult("email adresi daha önce alınmış");
+		}
+		if(this.ownerDao.findByUsername(username)!=null) {
+			return new ErrorResult("kullanıcı adı daha önce alınmış");
+		}
 		Owner owner = new Owner();
 		owner.setUsername(username);
 		owner.setPassword(password);
 		owner.setEmail(email);
-		owner.setAddress(address);
+		owner.setLatitude(latitude);
+		owner.setLongitude(longitude);
 		owner.setFirstName(firstName);
 		owner.setLastName(lastName);
 		try {
@@ -54,6 +62,15 @@ public class OwnerManager implements OwnerService {
 			return new SuccessDataResult<Owner>(this.ownerDao.findById(id).get());
 		} catch (Exception e) {
 			return new ErrorDataResult<Owner>(e.toString());
+		}
+	}
+
+	@Override
+	public DataResult<Owner> getByEmail(String email) {
+		try {
+			return new SuccessDataResult<Owner>(this.ownerDao.findByEmailContaining(email));
+		} catch (Exception e) {
+			return new ErrorDataResult<Owner>("bulunamadı");
 		}
 	}
 

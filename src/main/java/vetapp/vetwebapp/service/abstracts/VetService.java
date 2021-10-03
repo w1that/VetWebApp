@@ -11,7 +11,7 @@ public interface VetService {
 	
 	DataResult<List<Vet>> getAll();
 	DataResult<Vet> getById(int id);
-	Result add(String username,String password,String clinicName,String email,String address);
+	Result add(String username,String password,String clinicName,String email, String latitude, String longitude);
 	Result deleteAll();
 	Result deleteById(int id);
 	
