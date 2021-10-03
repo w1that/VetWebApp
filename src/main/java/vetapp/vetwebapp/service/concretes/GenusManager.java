@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import vetapp.vetwebapp.entities.Genus;
@@ -34,7 +35,7 @@ public class GenusManager implements GenusService{
 	@Override
 	public DataResult<Genus> getById(int id) {
 		try {
-			return new SuccessDataResult<Genus>(this.genusDao.getById(id));
+			return new SuccessDataResult<Genus>(this.genusDao.findById(id).get());
 		} catch (Exception e) {
 			return new ErrorDataResult<Genus>(e.toString());
 		}
@@ -69,8 +70,11 @@ public class GenusManager implements GenusService{
 			this.genusDao.deleteAll();
 			return new SuccessResult("hepsi silindi. genuses:"+ genusDao.findAll());
 		} catch (Exception e) {
+			if(e.toString().contains("DataIntegrityViolationException") ) {
+				return new ErrorResult("bu id anahtarına sahip referans alan bir tablo var. "+e.toString());
+			}
 			return new ErrorResult(e.toString());
-		}
+		} 
 	}
 	
 	

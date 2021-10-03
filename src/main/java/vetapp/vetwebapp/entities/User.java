@@ -7,18 +7,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
-
 import org.springframework.data.annotation.CreatedDate;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
-
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 
 @MappedSuperclass
 @Table(name="users")
-@Data
+@Getter
+@Setter
 public class User {
 	
 	@Id

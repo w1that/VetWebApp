@@ -5,18 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.sun.istack.Nullable;
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name="genuses")
@@ -29,9 +26,4 @@ public class Genus {
 	
 	@Column(name="name")
 	private String name;
-	 
-	@JsonIgnore
-	@OneToOne(mappedBy = "genus")
-	@Nullable
-	private Pet pet;
 }

@@ -35,6 +35,7 @@ public class PetManager implements PetService {
 			pet.setDisease(disease);
 			pet.setGenus(genusDao.getById(genusId));
 			pet.setOwner(ownerDao.getById(ownerId));
+			
 			this.petDao.save(pet);
 			return new SuccessResult("eklendi. pet: "+ pet);
 		} catch (Exception e) {
@@ -75,7 +76,7 @@ public class PetManager implements PetService {
 	@Override
 	public DataResult<Pet> getById(int id) {
 		try {
-			return new SuccessDataResult<Pet>(this.petDao.getById(id));
+			return new SuccessDataResult<Pet>(this.petDao.findById(id).get());
 		} catch (Exception e) {
 			return new ErrorDataResult<Pet>(e.toString());
 		}

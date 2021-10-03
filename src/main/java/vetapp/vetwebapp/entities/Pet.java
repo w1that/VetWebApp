@@ -1,8 +1,6 @@
 package vetapp.vetwebapp.entities;
 
 import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,40 +10,41 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import vetapp.vetwebapp.entities.images.PetImage;
 
 @Entity
 @Table(name="pets")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler","owner"})
+
 public class Pet {
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="id")
 	private int id;
 	
 	@Column(name="disease")
 	private String disease;
-	
+	 
 	@Column(name="age")
 	private int age;
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "genus_id", referencedColumnName = "id")
+	@ManyToOne()
+	@JoinColumn(name="genus_id")
 	private Genus genus;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
+
+
+	@ManyToOne(fetch=FetchType.LAZY)  
 	@JoinColumn(name="owner_id")
-	@JsonIgnore
 	private Owner owner;
 	
 	@OneToMany(mappedBy = "pet")
