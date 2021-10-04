@@ -28,13 +28,17 @@ public class PetManager implements PetService {
 	private OwnerDao ownerDao;
 
 	@Override
-	public Result add(String disease, int age, int genusId, int ownerId) {
+	public Result add(String disease, String description, int age, int genusId, int ownerId) {
 		try {
+			if(this.ownerDao.getById(ownerId).getPets().size()==1 && !this.ownerDao.getById(ownerId).isPremium()) {
+				return new ErrorResult("normal üyelikte en fazla 1 pet ekleyebilirsiniz.");
+			}
 			Pet pet = new Pet();
 			pet.setAge(age);
 			pet.setDisease(disease);
 			pet.setGenus(genusDao.getById(genusId));
 			pet.setOwner(ownerDao.getById(ownerId));
+			pet.setDescription(description);
 			
 			this.petDao.save(pet);
 			return new SuccessResult("eklendi. pet: "+ pet);
@@ -79,6 +83,15 @@ public class PetManager implements PetService {
 			return new SuccessDataResult<Pet>(this.petDao.findById(id).get());
 		} catch (Exception e) {
 			return new ErrorDataResult<Pet>(e.toString());
+		}
+	}
+
+	@Override
+	public DataResult<List<Pet>> getByGenusId(int id) {
+		try {
+			return new SuccessDataResult<List<Pet>>(this.petDao.findByGenusId(id));
+		} catch (Exception e) {
+			return new ErrorDataResult<List<Pet>>(e.toString());
 		}
 	}
 

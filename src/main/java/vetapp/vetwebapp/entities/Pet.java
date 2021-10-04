@@ -34,6 +34,9 @@ public class Pet {
 	
 	@Column(name="disease")
 	private String disease;
+	
+	@Column(columnDefinition = "TEXT", name="description" )
+	private String description;
 	 
 	@Column(name="age")
 	private int age;

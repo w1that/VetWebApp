@@ -19,4 +19,14 @@ public interface OwnerDao extends JpaRepository<Owner, Integer> {
 	@Query(value="update owner set is_active=true where id=:ownerId", nativeQuery = true)
 	void setActive(int ownerId);
 	
+	@Transactional
+	@Modifying
+	@Query(value="update owner set premium=true where id=:ownerId", nativeQuery = true)
+	void setPremium(int ownerId);
+	
+	@Transactional
+	@Modifying
+	@Query(value="update owner set premium=false where id=:ownerId", nativeQuery = true)
+	void setNotPremium(int ownerId);
+	
 }

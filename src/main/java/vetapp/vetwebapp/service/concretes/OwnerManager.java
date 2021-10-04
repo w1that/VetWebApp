@@ -74,4 +74,24 @@ public class OwnerManager implements OwnerService {
 		}
 	}
 
+	@Override
+	public Result setPremium(int id) {
+		try {
+			this.ownerDao.setPremium(id);
+			return new SuccessResult("premium hesaba geçti. id: "+ id);
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
+	}
+
+	@Override
+	public Result setNotPremium(int id) {
+		try {
+			this.ownerDao.setNotPremium(id);
+			return new SuccessResult("normal hesaba geçti. id: "+ id);
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
+		}
+	}
+
 }

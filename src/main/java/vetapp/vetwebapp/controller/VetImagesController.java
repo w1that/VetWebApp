@@ -48,7 +48,7 @@ public class VetImagesController {
 		
 	}
 	
-	@DeleteMapping("/vet")
+	@DeleteMapping("/vet-image/")
 	public Result deleteById(int id) {
 		return this.vetImageService.deleteById(id);
 	}
@@ -58,7 +58,7 @@ public class VetImagesController {
 		return this.vetImageService.getAll();
 	}
 	
-	@GetMapping(value="/vet")
+	@GetMapping(value="/vet-image/")
 	public DataResult<List<VetImage>> getByCarId(@RequestParam int id) {
 		return this.vetImageService.getByVetId(id);
 	}

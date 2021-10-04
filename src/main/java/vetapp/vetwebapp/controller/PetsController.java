@@ -32,6 +32,11 @@ public class PetsController {
 		return this.petService.getById(id);
 	}
 	
+	@GetMapping("/pets/genus/")
+	public DataResult<List<Pet>> getByGenusId(@RequestParam int id){
+		return this.petService.getByGenusId(id);
+	}
+	
 	@DeleteMapping("/")
 	public Result deleteAll() {
 		return this.petService.deleteAll();
@@ -43,8 +48,9 @@ public class PetsController {
 	}
 	
 	@PostMapping("/")
-	public Result add(String disease, int age, int genusId, int ownerId) {
-		return this.petService.add(disease, age, genusId, ownerId);
+	public Result add(@RequestParam String disease, @RequestParam String description, @RequestParam int age, 
+			@RequestParam int genusId, @RequestParam int ownerId) {
+		return this.petService.add(disease,description, age, genusId, ownerId);
 	}
 	
 }

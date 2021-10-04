@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import vetapp.vetwebapp.entities.images.OwnerImage;
 import vetapp.vetwebapp.entities.images.PetImage;
+import vetapp.vetwebapp.repository.OwnerDao;
 import vetapp.vetwebapp.repository.OwnerImageDao;
 import vetapp.vetwebapp.repository.PetImageDao;
 import vetapp.vetwebapp.results.DataResult;
@@ -24,14 +25,19 @@ import vetapp.vetwebapp.utilities.imageUpload.ImageUploadService;
 public class OwnerImageManager implements OwnerImageService {
 
 	@Autowired
-	OwnerImageDao ownerImageDao;
+	private OwnerImageDao ownerImageDao;
 	@Autowired
-	ImageUploadService imageUploadService;
+	private ImageUploadService imageUploadService;
+	@Autowired
+	private OwnerDao ownerDao;
 	
 	@Override
 	public Result upload(int ownerId, OwnerImage ownerImage, MultipartFile file) {
 		try {
-			if(this.ownerImageDao.getByOwnerId(ownerId).size()<5) {
+			if(this.ownerDao.getById(ownerId).getImage() != null){
+				return new ErrorResult("zaten bir fotoğrafı var. id: "+ ownerId);
+			}
+			else {
 				@SuppressWarnings("unchecked")
 				Map<String,String> uploadedImage=(Map<String,String>)this.imageUploadService.upload(file).getData();
 				ownerImage.setImagePath(uploadedImage.get("url"));
@@ -40,9 +46,10 @@ public class OwnerImageManager implements OwnerImageService {
 				
 				return new SuccessResult("image eklendi");
 			}
-			else {
-				return new ErrorResult("en fazla 5 image eklenebilir");
-			}
+				
+		
+				 
+			
 		} catch (Exception e) {
 			return new ErrorResult(e.toString());
 		}
@@ -51,7 +58,9 @@ public class OwnerImageManager implements OwnerImageService {
 	@Override
 	public DataResult<List<OwnerImage>> getAll() {
 		try {
+			
 			return new SuccessDataResult<List<OwnerImage>>(this.ownerImageDao.findAll());
+			
 		} catch (Exception e) {
 			return new ErrorDataResult<List<OwnerImage>>(e.toString());
 		}
@@ -73,6 +82,19 @@ public class OwnerImageManager implements OwnerImageService {
 			return new SuccessDataResult<List<OwnerImage>>(this.ownerImageDao.getByOwnerId(id));
 		} catch (Exception e) {
 			return new ErrorDataResult<List<OwnerImage>>(e.toString());
+		}
+	}
+
+	@Override
+	public Result deleteByOwnerId(int id) {
+		try {
+			if(this.ownerDao.getById(id).getImage()!=null) {
+				this.ownerImageDao.deleteByOwnerId(id);
+				return new SuccessResult("silindi. ownerid: "+ id);
+			}
+			return new ErrorResult();
+		} catch (Exception e) {
+			return new ErrorResult(e.toString());
 		}
 	}
 

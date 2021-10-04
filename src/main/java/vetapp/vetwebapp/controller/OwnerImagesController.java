@@ -43,17 +43,22 @@ public class OwnerImagesController {
 		}
 	}
 	
-	@DeleteMapping("/pet")
+	@DeleteMapping("/owner-image")
 	public Result deleteById(int id) {
 		return this.ownerImageService.deleteById(id);
 	}
+	
+	/*@DeleteMapping("/owner-image/owner/")
+	public Result deleteByOwnerId(int id) {
+		return this.ownerImageService.deleteByOwnerId(id);
+	}*/
 	
 	@GetMapping("/")
 	public DataResult<List<OwnerImage>> getAll(){
 		return this.ownerImageService.getAll();
 	}
 	
-	@GetMapping(value="/pet")
+	@GetMapping(value="/owner-image")
 	public DataResult<List<OwnerImage>> getByCarId(@RequestParam int id) {
 		return this.ownerImageService.getByOwnerId(id);
 	}

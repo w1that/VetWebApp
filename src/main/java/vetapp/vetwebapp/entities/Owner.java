@@ -1,11 +1,15 @@
 package vetapp.vetwebapp.entities;
 
 import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,10 +31,15 @@ public class Owner extends User {
 	
 	private String lastName;
 	
+	@Column(name="premium")
+	private boolean premium= false;
+	
 	@OneToMany(mappedBy="owner")
 	private List<Pet> pets;
 	
-	@OneToMany(mappedBy = "owner")
-	private List<OwnerImage> images;
+	/*@OneToMany(mappedBy = "owner")
+	private List<OwnerImage> images;*/
 
+	@OneToOne(mappedBy = "owner")
+	private OwnerImage image;
 }

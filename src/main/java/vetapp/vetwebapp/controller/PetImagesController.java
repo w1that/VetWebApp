@@ -38,7 +38,7 @@ public class PetImagesController {
 		}
 	}
 	
-	@DeleteMapping("/pet")
+	@DeleteMapping("/pet-image")
 	public Result deleteById(int id) {
 		return this.petImageService.deleteById(id);
 	}
@@ -48,7 +48,7 @@ public class PetImagesController {
 		return this.petImageService.getAll();
 	}
 	
-	@GetMapping(value="/pet")
+	@GetMapping(value="/pet-image")
 	public DataResult<List<PetImage>> getByCarId(@RequestParam int id) {
 		return this.petImageService.getByPetId(id);
 	}

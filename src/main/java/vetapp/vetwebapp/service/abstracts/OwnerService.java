@@ -14,7 +14,8 @@ public interface OwnerService {
 	DataResult<Owner> getById(int id);
 	DataResult<Owner> getByEmail(String email);
 	
-	
+	Result setPremium(int id);
+	Result setNotPremium(int id);
 	
 	
 }

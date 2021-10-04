@@ -11,6 +11,7 @@ public interface OwnerImageService {
 	Result upload (int ownerId,OwnerImage ownerImage,MultipartFile file);
 	DataResult<List<OwnerImage>> getAll();
 	Result deleteById(int id);
+	Result deleteByOwnerId(int id);
 	
 	DataResult<List<OwnerImage>> getByOwnerId(int id);
 }
