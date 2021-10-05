@@ -9,6 +9,8 @@ import javax.persistence.MappedSuperclass;
 import javax.persistence.Table;
 import org.springframework.data.annotation.CreatedDate;
 import com.sun.istack.NotNull;
+import com.sun.istack.Nullable;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,9 +44,11 @@ public class User {
 	@CreatedDate
 	private LocalDate createdAt = LocalDate.now();
 	
+	@Nullable
 	@Column(name="longitude")
 	private String longitude;
 	
+	@Nullable
 	@Column(name="latitude")
 	private String latitude;
 	

@@ -37,9 +37,6 @@ public class Owner extends User {
 	@OneToMany(mappedBy="owner")
 	private List<Pet> pets;
 	
-	/*@OneToMany(mappedBy = "owner")
-	private List<OwnerImage> images;*/
-
 	@OneToOne(mappedBy = "owner")
 	private OwnerImage image;
 }

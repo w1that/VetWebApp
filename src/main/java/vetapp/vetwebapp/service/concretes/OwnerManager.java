@@ -94,4 +94,15 @@ public class OwnerManager implements OwnerService {
 		}
 	}
 
+	@Override
+	public DataResult<Owner> getByUsername(String username) {
+		try {
+			return new SuccessDataResult<Owner>(this.ownerDao.findByUsername(username));
+		} catch (Exception e) {
+			return new ErrorDataResult(e.toString());
+		}
+	}
+
+	
+
 }

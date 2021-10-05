@@ -126,4 +126,13 @@ public class VetManager implements VetService{
 			return new ErrorResult(e.toString());
 		}
 	}
+
+	@Override
+	public DataResult<Vet> getByUsername(String username) {
+		try {
+			return new SuccessDataResult<Vet>(this.vetDao.findByUsername(username));
+		} catch (Exception e) {
+			return new ErrorDataResult<Vet>(e.toString());
+		}
+	}
 }

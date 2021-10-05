@@ -41,10 +41,6 @@ public class OwnerImage {
 	@Column(name="created_at")
 	private LocalDate createdAt = LocalDate.now();
 	
-	/*@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="owner_id")
-	@JsonIgnore
-	private Owner owner;*/
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="owner_id")

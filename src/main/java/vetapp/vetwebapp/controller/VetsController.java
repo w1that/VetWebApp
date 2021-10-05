@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,6 +21,7 @@ import vetapp.vetwebapp.service.abstracts.VetService;
 
 @RestController
 @RequestMapping("/v1/vets")
+@CrossOrigin
 public class VetsController {
 
 	@Autowired
@@ -46,9 +48,14 @@ public class VetsController {
 		return this.vetService.getByClinicNameContaining(containing);
 	}
 	
-	@GetMapping("getActives")
+	@GetMapping("/getActives")
 	DataResult<List<Vet>> getByIsActiveTrue(){
 		return this.vetService.getByIsActiveTrue();
+	}
+	
+	@GetMapping("/vet/username")
+	DataResult<Vet> getByUsername(@RequestParam String username){
+		return this.vetService.getByUsername(username);
 	}
 	
 	/*@PostMapping("/")

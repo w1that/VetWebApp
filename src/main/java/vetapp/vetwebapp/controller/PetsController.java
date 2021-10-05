@@ -3,6 +3,7 @@ package vetapp.vetwebapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import vetapp.vetwebapp.service.abstracts.PetService;
 
 @RestController
 @RequestMapping("/v1/pets")
+@CrossOrigin
 public class PetsController {
 	
 	@Autowired
@@ -36,6 +38,8 @@ public class PetsController {
 	public DataResult<List<Pet>> getByGenusId(@RequestParam int id){
 		return this.petService.getByGenusId(id);
 	}
+	
+	
 	
 	@DeleteMapping("/")
 	public Result deleteAll() {

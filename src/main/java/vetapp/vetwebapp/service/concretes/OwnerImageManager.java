@@ -85,17 +85,6 @@ public class OwnerImageManager implements OwnerImageService {
 		}
 	}
 
-	@Override
-	public Result deleteByOwnerId(int id) {
-		try {
-			if(this.ownerDao.getById(id).getImage()!=null) {
-				this.ownerImageDao.deleteByOwnerId(id);
-				return new SuccessResult("silindi. ownerid: "+ id);
-			}
-			return new ErrorResult();
-		} catch (Exception e) {
-			return new ErrorResult(e.toString());
-		}
-	}
+	
 
 }

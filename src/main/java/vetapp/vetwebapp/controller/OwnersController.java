@@ -3,6 +3,7 @@ package vetapp.vetwebapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import vetapp.vetwebapp.service.abstracts.OwnerService;
 
 @RestController
 @RequestMapping("/v1/owners")
+@CrossOrigin
 public class OwnersController {
 	
 	@Autowired
@@ -32,9 +34,14 @@ public class OwnersController {
 		return this.ownerService.getById(id);
 	}
 	
-	@GetMapping("/owner/")
+	@GetMapping("/owner/email/")
 	public DataResult<Owner> getByEmail(@RequestParam String email){
 		return this.ownerService.getByEmail(email);
+	}
+	
+	@GetMapping("/owner/username/")
+	public DataResult<Owner> getByUsername(@RequestParam String username){
+		return this.ownerService.getByUsername(username);
 	}
 	
 	@PostMapping("/")
@@ -42,6 +49,7 @@ public class OwnersController {
 		return this.ownerService.add(username, password, email, latitude, longitude, firstName, lastName);
 	}
 	
+ 	
 	@PutMapping("/owner/premium/")
 	public Result setPremium(@RequestParam int id) {
 		return this.ownerService.setPremium(id);

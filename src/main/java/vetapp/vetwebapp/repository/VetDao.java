@@ -15,6 +15,7 @@ public interface VetDao extends JpaRepository<Vet, Integer>{
 	public List<Vet> findByClinicNameLike(String like);
 	public List<Vet> findByClinicNameContaining(String containing);
 	public List<Vet> findByIsActiveTrue();
+	public Vet findByUsername(String username);
 	
 	@Transactional
 	@Modifying

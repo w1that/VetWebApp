@@ -3,6 +3,7 @@ package vetapp.vetwebapp.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ import vetapp.vetwebapp.service.abstracts.OwnerImageService;
 import vetapp.vetwebapp.service.abstracts.OwnerService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/v1/owner-images/")
 public class OwnerImagesController {
 
@@ -47,11 +49,6 @@ public class OwnerImagesController {
 	public Result deleteById(int id) {
 		return this.ownerImageService.deleteById(id);
 	}
-	
-	/*@DeleteMapping("/owner-image/owner/")
-	public Result deleteByOwnerId(int id) {
-		return this.ownerImageService.deleteByOwnerId(id);
-	}*/
 	
 	@GetMapping("/")
 	public DataResult<List<OwnerImage>> getAll(){

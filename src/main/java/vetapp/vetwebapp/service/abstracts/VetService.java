@@ -19,7 +19,7 @@ public interface VetService {
 	DataResult<List<Vet>>  getByClinicNameLike(String like);
 	DataResult<List<Vet>>  getByClinicNameContaining(String containing);
 	DataResult<List<Vet>> getByIsActiveTrue();
-	
+	DataResult<Vet> getByUsername(String username);
 	Result setActive(int vetId);
 	
 }
