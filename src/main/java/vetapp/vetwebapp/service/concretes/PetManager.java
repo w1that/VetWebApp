@@ -95,4 +95,13 @@ public class PetManager implements PetService {
 		}
 	}
 
+	@Override
+	public DataResult<List<Pet>> getByOwnerId(int id) {
+		try {
+			return new SuccessDataResult<List<Pet>>(this.petDao.findByOwnerId(id));
+		} catch (Exception e) {
+			return new ErrorDataResult<List<Pet>>(e.toString());
+		}
+	}
+
 }

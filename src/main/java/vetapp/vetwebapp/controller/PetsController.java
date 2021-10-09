@@ -39,7 +39,10 @@ public class PetsController {
 		return this.petService.getByGenusId(id);
 	}
 	
-	
+	@GetMapping("/pets/pet/owner")
+	public DataResult<List<Pet>> getByOwnerId(@RequestParam int id){
+		return this.petService.getByOwnerId(id);
+	}
 	
 	@DeleteMapping("/")
 	public Result deleteAll() {

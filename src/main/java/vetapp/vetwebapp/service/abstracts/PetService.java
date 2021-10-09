@@ -16,6 +16,7 @@ public interface PetService {
 	DataResult<Pet> getById(int id);
 	
 	DataResult<List<Pet>> getByGenusId(int id);
-	
+	DataResult<List<Pet>> getByOwnerId(int id);
+
 
 }
